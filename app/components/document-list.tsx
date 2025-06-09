@@ -24,10 +24,13 @@ export function DocumentList({ documents }: DocumentListProps) {
 
   // Filtra os documentos com base na busca, aba ativa e data
   const filteredDocuments = documents.filter((doc) => {
+    const cleanTitle = doc.title.replace("/", "").replace(".", "")
+    const cleanDescription = doc.description.replace("/", "").replace(".", "")
+    const cleanNumber = doc.number.replace("/", "").replace(".", "")
     const matchesSearch =
-      doc.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      doc.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      doc.number.toLowerCase().includes(searchTerm.toLowerCase())
+      cleanTitle.toLowerCase().includes(searchTerm.toLowerCase().replace("/", "").replace(".", "")) ||
+      cleanDescription.toLowerCase().includes(searchTerm.toLowerCase().replace("/", "").replace(".", "")) ||
+      cleanNumber.toLowerCase().includes(searchTerm.toLowerCase().replace("/", "").replace(".", ""))
 
     const matchesTab = activeTab === "ALL" || doc.type === activeTab
 
